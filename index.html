@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Flugsuche</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        #results { margin-top: 20px; }
+        .flight-item { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Flugsuche</h1>
+    <form id="search-form">
+        <input type="text" id="origin" placeholder="Abflug (z.B. FRA)" required>
+        <input type="text" id="destination" placeholder="Ziel (z.B. JFK)" required>
+        <button type="submit">Flüge suchen</button>
+    </form>
+
+    <div id="results"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
