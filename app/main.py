@@ -1,5 +1,9 @@
+from dotenv import load_dotenv # 1. Importiere die Funktion zum Laden der .env-Datei
+load_dotenv()                 # 2. Lade die Umgebungsvariablen
+
 from fastapi import FastAPI
-from .routers import flights
+from fastapi.middleware.cors import CORSMiddleware
+from .routers.flights import router
 
 app = FastAPI(
     title="Flugbuchungs-API",
@@ -7,7 +11,17 @@ app = FastAPI(
     version="1.0.0",
 )
 
-app.include_router(flights.router, prefix="/api/v1")
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(router, prefix="/api/v1")
 
 @app.get("/")
 def read_root():

@@ -9,9 +9,10 @@ router = APIRouter()
 def search_flights(
     origin: str = Query(..., min_length=3, max_length=3),
     destination: str = Query(..., min_length=3, max_length=3),
+    airline_name: str = Query(None)
 ):
     try:
-        flights = flight_service.find_flights_from_api(origin, destination)
+        flights = flight_service.find_flights_from_api(origin, destination, airline_name)
         return flights
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

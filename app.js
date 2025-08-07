@@ -3,8 +3,13 @@ document.getElementById('search-form').addEventListener('submit', async (e) => {
 
     const origin = document.getElementById('origin').value;
     const destination = document.getElementById('destination').value;
+    const airlineName = document.getElementById('airline_name').value;
 
-    const url = `http://127.0.0.1:8000/api/v1/flights/search?origin=${origin}&destination=${destination}`;
+    let url = `http://127.0.0.1:8000/api/v1/flights/search?origin=${origin}&destination=${destination}`;
+
+    if (airlineName) {
+        url += `&airline_name=${airlineName}`;
+    }
 
     try {
         const response = await fetch(url);

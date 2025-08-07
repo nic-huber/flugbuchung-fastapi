@@ -2,17 +2,23 @@ import requests
 from typing import List
 from ..models.flight import FlightResponse
 import os
+from datetime import date
 
 API_KEY = os.getenv("AVIATIONSTACK_API_KEY")
 API_URL = "http://api.aviationstack.com/v1/flights"
 
-def find_flights_from_api(origin: str, destination: str) -> List[FlightResponse]:
+def find_flights_from_api(origin: str, destination: str, airline_name: str = None) -> List[FlightResponse]:
+    print(f"Geladener API-Schlüssel: {API_KEY}")
+
     params = {
         "access_key": API_KEY,
         "dep_iata": origin,
         "arr_iata": destination,
-        "flight_status": "scheduled"
+        "flight_status": "scheduled",
     }
+    
+    if airline_name:
+        params["airline_name"] = airline_name
 
     print(f"Abfrage der Aviationstack API mit Parametern: {params}")
 
